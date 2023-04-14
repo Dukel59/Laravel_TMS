@@ -6,10 +6,10 @@
     <meta http-equiv="content-type" content="text/html; charset=utf-8" />
     <meta name="author" content="INSPIRO" />
     <meta name="description" content="Themeforest Template Polo, html template">
-    <link rel="icon" type="image/png" href="{{'images/favicon.png'}}">
+{{--    <link rel="icon" type="image/png" href="{{'images/favicon.png'}}">--}}
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <!-- Document title -->
-    <title>{{'Polo'}}</title>
+{{--    <title>{{'Polo'}}</title>--}}
     <!-- Stylesheets & Fonts -->
     <link href="{{ asset('/css/plugins.css') }}" rel="stylesheet">
     <link href="{{ asset('/css/style.css') }}" rel="stylesheet">
@@ -29,6 +29,28 @@
                         <img src="images/logo-circle.png" class="logo-default">
                         <img src="images/logo-circle-dark.png" class="logo-dark">
                     </a>
+                </div>
+                <div class="header-extras">
+                    <ul>
+                        @guest
+                            <li>
+                                <a href="{{route('auth.login')}}">Login</a>
+                            </li>
+                            <li>
+                                <a href="{{route('auth.register')}}" >Register</a>
+                            </li>
+                        @endguest
+                        @auth
+                            <li>
+                                <a href="{{route('account.show')}}">
+                                    <i class="fa fa-user"></i>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="{{route('auth.logout')}}" >Logout</a>
+                            </li>
+                        @endauth
+                    </ul>
                 </div>
                 <!--End: Logo-->
                 <!--Navigation Resposnive Trigger-->
