@@ -49,6 +49,13 @@
                             <li>
                                 <a href="{{route('auth.logout')}}" >Logout</a>
                             </li>
+                                @if(Auth::user()->is_admin)
+                                    <li class="dropdown"><a href="{{ route('admin.products.index') }}">Admin</a>
+{{--                                        <ul class="dropdown-menu">--}}
+{{--                                            <li><a href="{{ route('admin.products.index') }}">Dishes</a></li>--}}
+{{--                                        </ul>--}}
+                                    </li>
+                                @endif
                         @endauth
                     </ul>
                 </div>
@@ -150,6 +157,15 @@
         </div>
     </footer>
     <!-- end: Footer -->
+    @if (session('success'))
+        <div id="notification-modal" data-notify="container" data-animate="zoomIn" class="bootstrap-notify col-xs-11 col-sm-3 alert alert-success" role="alert" data-notify-position="top-right" style="display: inline-block; margin: 0px auto; position: fixed; transition: all 0.5s ease-in-out 0s; z-index: 10000; top: 30px; right: 30px;">
+            <span data-notify="title">{{ session('success') }}</span>
+        </div>
+    @elseif(session('error'))
+        <div id="notification-modal" data-notify="container" data-animate="zoomIn" class="bootstrap-notify col-xs-11 col-sm-3 alert alert-danger" role="alert" data-notify-position="top-right" style="display: inline-block; margin: 0px auto; position: fixed; transition: all 0.5s ease-in-out 0s; z-index: 10000; top: 30px; right: 30px;">
+            <span data-notify="icon"></span> <span data-notify="title">{{ session('error') }}</span>
+        </div>
+    @endif
 </div>
 <!-- end: Body Inner -->
 <!-- Scroll top -->
@@ -159,6 +175,11 @@
 <script src="{{asset('/js/plugins.js')}}"></script>
 <!--Template functions-->
 <script src="{{asset('/js/functions.js')}}"></script>
+<script>
+    setTimeout( function() {
+        $('#notification-modal').hide('slow');
+    }, 3000);
+</script>
 </body>
 
 </html>
